@@ -17,16 +17,16 @@ These three cloud APIs from Oracle give access to the three main components in t
 - Simphony Transaction Services (TS, STS or POS API) is the API used to post new orders into Simphony. It also provides access to certain critical aspects of the configuration (mainly items, payments, discounts and so on) to facilitate a custom online ordering solution. Previously the API was hosted in Simphony as a legacy asmx service without authentication or authorization. Different partners made many different solutions to solve this (including Muneris), they all included some sort of reverse proxy or ssl tunneling. Now, with the STS gen2 API, we can access Simphony from the cloud securely and efficiently.
 
 
+
 If you want to know more about the three cloud API's, the documentation can be found here:
 
 * Configuration and Content API Guide
 https://docs.oracle.com/en/industries/food-beverage/simphony/ccapi
 
 
-If you want to know more about the three API's, the documentation can be found here:
-
 * Simphony Transaction Services Gen2 API Guide
 https://docs.oracle.com/en/industries/food-beverage/simphony/omsstsg2api
+
 
 * Business Intelligence API Guide
 https://docs.oracle.com/en/industries/food-beverage/back-office/20.1/biapi
