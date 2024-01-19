@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -151,14 +152,14 @@ namespace Muneris
         {
             var verifierBytes = Encoding.ASCII.GetBytes(codeVerifier);
             var hashValue = SHA256.Create().ComputeHash(verifierBytes);
-            return Convert.ToBase64String(hashValue);
+            return Base64UrlEncoder.Encode(hashValue);
         }
 
         private static string GenerateCodeVerifyer()
         {
             var rndBytes = new byte[32];
             new Random().NextBytes(rndBytes);
-            return Convert.ToBase64String(rndBytes);
+            return Base64UrlEncoder.Encode(rndBytes);
         }
 
         private class SignInResponse
