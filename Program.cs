@@ -38,10 +38,12 @@ namespace Muneris
             var authInfo = OracleAuthHelper.GetAuthInfo(authBaseUrl, clientId, username, password, orgName);
 
             //StsApi_GetOrganizations(apiUrl, authInfo.AccessToken);
-            StsApi_GetLocations(apiBaseUrl, authInfo.AccessToken, orgName);
+            //StsApi_GetLocations(apiBaseUrl, authInfo.AccessToken, orgName);
             //StsApi_GetRevenueCenters(apiUrl, authInfo.AccessToken, orgName, locRef);
 
             //StsApi_GetTenders(apiUrl, authInfo.AccessToken, orgName, locRef, rvcRef);
+            //StsApi_GetMenuSummary(apiBaseUrl, authInfo.AccessToken, orgName, locRef, rvcRef);
+            //StsApi_GetMenuDetails(apiBaseUrl, authInfo.AccessToken, orgName, locRef, rvcRef);
 
             //StsApi_PostCalculateTotals(apiUrl, authInfo.AccessToken, orgName, locRef, rvcRef);
             //StsApi_PostNewOrder(apiUrl, authInfo.AccessToken, orgName, locRef, rvcRef);
@@ -362,6 +364,31 @@ namespace Muneris
             client.QueryString.Add("RvcRef", rvcRef);
 
             var url = $"{apiBaseUrl}/api/v1/tenders/collection";
+            var data = client.DownloadString(url);
+            Console.WriteLine(data);
+        }
+        private static void StsApi_GetMenuSummary(string apiBaseUrl, string accessToken, string orgName, string lofRef, string rvcRef)
+        {
+            var client = new WebClient();
+            client.Headers.Add(HttpRequestHeader.Authorization, $"Bearer {accessToken}");
+
+            client.QueryString.Add("OrgShortName", orgName);
+            client.QueryString.Add("LocRef", lofRef);
+
+            var url = $"{apiBaseUrl}/api/v1/menus/summary";
+            var data = client.DownloadString(url);
+            Console.WriteLine(data);
+        }
+        private static void StsApi_GetMenuDetails(string apiBaseUrl, string accessToken, string orgName, string lofRef, string rvcRef)
+        {
+            var client = new WebClient();
+            client.Headers.Add(HttpRequestHeader.Authorization, $"Bearer {accessToken}");
+
+            client.Headers.Add("Simphony-OrgShortName", orgName);
+            client.Headers.Add("Simphony-LocRef", lofRef);
+            client.Headers.Add("Simphony-RvcRef", rvcRef);
+
+            var url = $"{apiBaseUrl}/api/v1/menus/{orgName}:{lofRef}:{rvcRef}";
             var data = client.DownloadString(url);
             Console.WriteLine(data);
         }
